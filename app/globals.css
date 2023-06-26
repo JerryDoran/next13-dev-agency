@@ -17,11 +17,22 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
+  color: #ddd;
   background: linear-gradient(
       to bottom,
       transparent,
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+}
+
+@layer components {
+  .container {
+    @apply max-w-[1366px] min-h-screen mx-auto px-[60px] flex flex-col justify-between;
+  }
+}
+
+.hero-clip {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
