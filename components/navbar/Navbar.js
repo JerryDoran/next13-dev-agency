@@ -11,7 +11,11 @@ export default function Navbar() {
       </Link>
       <nav className='hidden md:flex md:items-center gap-6'>
         {links.map((link) => (
-          <Link key={link.id} href={link.url}>
+          <Link
+            key={link.id}
+            href={link.url}
+            className='transition-colors duration-200 hover:text-[#53c28b]'
+          >
             {link.title}
           </Link>
         ))}
