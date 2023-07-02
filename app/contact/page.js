@@ -6,7 +6,7 @@ export default function ContactPage() {
   return (
     <div className=''>
       <h1 className='text-6xl font-bold mb-24 text-center'>
-        Let's Keep In Touch
+        Let&apos;s Keep In Touch
       </h1>
       <div className='flex items-center gap-24'>
         <div className='flex-1 h-[500px] relative'>
