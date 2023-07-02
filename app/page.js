@@ -18,7 +18,7 @@ export default function Home() {
         <Button text='See Our Work' url='/portfolio' />
       </div>
       <div className='flex-1'>
-        <Image src={hero} className='w-full object-cover' alt='hero' />
+        <Image src={hero} className='w-full object-cover move' alt='hero' />
       </div>
     </main>
   );

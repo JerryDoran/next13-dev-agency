@@ -36,3 +36,16 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+.move {
+  animation: bounce 2.5s infinite ease alternate;
+}
+
+@keyframes bounce {
+  from {
+    transform: translateY(-15px);
+  }
+  to {
+    transform: translateY(0) scale(1.03);
+  }
+}
