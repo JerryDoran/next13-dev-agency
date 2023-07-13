@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { links } from './linksData';
+import DarkModeToggle from '../DarkModeToggle';
 
 export default function Navbar() {
   return (
@@ -10,6 +11,7 @@ export default function Navbar() {
         Maestro
       </Link>
       <nav className='hidden md:flex md:items-center gap-6'>
+        <DarkModeToggle />
         {links.map((link) => (
           <Link
             key={link.id}
