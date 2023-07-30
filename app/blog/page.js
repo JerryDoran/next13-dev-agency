@@ -1,70 +1,44 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
 
-export default function BlogPage() {
+async function getBlogData() {
+  const res = await fetch('http://localhost:3000/api/posts', {
+    cache: 'no-store',
+  });
+
+  if (!res.ok) {
+    throw new Error('Failed to fetch blogs!');
+  }
+
+  return res.json();
+}
+
+export default async function BlogPage() {
+  const data = await getBlogData();
+
   return (
     <div className=''>
-      <Link href={`/blog/testId`} className='flex items-center gap-10 mb-12'>
-        <div className=''>
-          <Image
-            src='https://images.pexels.com/photos/879537/pexels-photo-879537.jpeg?auto=compress&cs=tinysrgb&w=400'
-            alt=''
-            width={400}
-            height={250}
-            className='object-cover'
-          />
-        </div>
-        <div className=''>
-          <h1 className='mb-4'>hey</h1>
-          <p className='text-lg'>hey there</p>
-        </div>
-      </Link>
-      <Link href={`/blog/testId`} className='flex items-center gap-10 mb-12'>
-        <div className=''>
-          <Image
-            src='https://images.pexels.com/photos/879537/pexels-photo-879537.jpeg?auto=compress&cs=tinysrgb&w=400'
-            alt=''
-            width={400}
-            height={250}
-            className='object-cover'
-          />
-        </div>
-        <div className=''>
-          <h1 className='mb-4'>hey</h1>
-          <p className='text-lg'>hey there</p>
-        </div>
-      </Link>
-      <Link href={`/blog/testId`} className='flex items-center gap-10 mb-12'>
-        <div className=''>
-          <Image
-            src='https://images.pexels.com/photos/879537/pexels-photo-879537.jpeg?auto=compress&cs=tinysrgb&w=400'
-            alt=''
-            width={400}
-            height={250}
-            className='object-cover'
-          />
-        </div>
-        <div className=''>
-          <h1 className='mb-4'>hey</h1>
-          <p className='text-lg'>hey there</p>
-        </div>
-      </Link>
-      <Link href={`/blog/testId`} className='flex items-center gap-10 mb-12'>
-        <div className=''>
-          <Image
-            src='https://images.pexels.com/photos/879537/pexels-photo-879537.jpeg?auto=compress&cs=tinysrgb&w=400'
-            alt=''
-            width={400}
-            height={250}
-            className='object-cover'
-          />
-        </div>
-        <div className=''>
-          <h1 className='mb-4'>hey</h1>
-          <p className='text-lg text-[#999]'>hey there</p>
-        </div>
-      </Link>
+      {data.map((post) => (
+        <Link
+          key={post.id}
+          href={`/blog/${post._id}`}
+          className='flex items-center gap-10 mb-12'
+        >
+          <div className='flex-[.5]'>
+            <Image
+              src={post.image}
+              alt=''
+              width={400}
+              height={250}
+              className='object-cover'
+            />
+          </div>
+          <div className='flex-1'>
+            <h1 className='mb-4 text-2xl font-semibold'>{post.title}</h1>
+            <p className='text-md'>{post.description}</p>
+          </div>
+        </Link>
+      ))}
     </div>
   );
 }

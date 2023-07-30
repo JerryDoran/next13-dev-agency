@@ -1,35 +1,52 @@
 import Image from 'next/image';
-import React from 'react';
+import { notFound } from 'next/navigation';
 
-export default function BlogPost() {
+async function getBlogData(id) {
+  const res = await fetch(`http://localhost:3000/api/posts/${id}`, {
+    cache: 'no-store',
+  });
+
+  if (!res.ok) {
+    return notFound();
+  }
+
+  return res.json();
+}
+
+export async function generateMetadata({ params }) {
+  const post = await getBlogData(params.id);
+
+  return {
+    title: post.title,
+    description: post.description,
+  };
+}
+
+export default async function BlogPost({ params }) {
+  const data = await getBlogData(params.id);
   return (
     <div className=''>
       <div className='flex'>
         <div className='flex-1 flex flex-col justify-between'>
-          <h1 className='text-4xl'>Title</h1>
-          <p className='text-lg font-light'>Description</p>
+          <h1 className='text-4xl'>{data.title}</h1>
+          <p className='text-lg font-light'>{data.description}</p>
           <div className='flex items-center gap-3'>
             <Image
-              src='https://images.pexels.com/photos/879537/pexels-photo-879537.jpeg?auto=compress&cs=tinysrgb&w=400'
+              src={data.image}
               alt=''
               width={40}
               height={40}
               className='object-cover rounded-full'
             />
-            <span className=''>username</span>
+            <span className=''>{data.username}</span>
           </div>
         </div>
         <div className='flex-1 h-[300px] relative'>
-          <Image
-            src='https://images.pexels.com/photos/879537/pexels-photo-879537.jpeg?auto=compress&cs=tinysrgb&w=400'
-            alt=''
-            fill={true}
-            className='object-cover'
-          />
+          <Image src={data.image} alt='' fill={true} className='object-cover' />
         </div>
       </div>
       <div className='mt-12 text-lg font-light text-[#999] text-justify'>
-        <p className=''>content</p>
+        <p className=''>{data.content}</p>
       </div>
     </div>
   );

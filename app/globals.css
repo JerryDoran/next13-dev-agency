@@ -30,6 +30,14 @@ body {
   .container {
     @apply max-w-[1366px] min-h-screen mx-auto px-[60px] flex flex-col justify-between;
   }
+
+  .theme.light {
+    @apply bg-white text-[#111] transition duration-1000 ease-in-out;
+  }
+
+  .theme.dark {
+    @apply bg-black text-[#bbb] transition duration-1000 ease-in-out;
+  }
 }
 
 .hero-clip {

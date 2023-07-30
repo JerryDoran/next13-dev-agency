@@ -2,6 +2,11 @@ import Button from '@/components/Button';
 import Image from 'next/image';
 import React from 'react';
 
+export const metadata = {
+  title: 'Agency Contact',
+  description: 'How can we help you?',
+};
+
 export default function ContactPage() {
   return (
     <div className=''>
