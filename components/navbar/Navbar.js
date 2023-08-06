@@ -10,7 +10,7 @@ export default function Navbar() {
       <Link className='font-bold text-2xl' href='/'>
         Maestro
       </Link>
-      <nav className='hidden md:flex md:items-center gap-6'>
+      <nav className='hidden lg:flex md:items-center gap-6'>
         <DarkModeToggle />
         {links.map((link) => (
           <Link

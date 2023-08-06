@@ -1,5 +1,6 @@
 'use client';
 
+import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 
@@ -27,6 +28,8 @@ export default function DashboardPage() {
   //   getData();
   // }, []);
 
+  const session = useSession();
+
   function fetcher(...args) {
     return fetch(...args).then((res) => res.json());
   }
@@ -35,8 +38,6 @@ export default function DashboardPage() {
     'https://jsonplaceholder.typicode.com/posts',
     fetcher
   );
-
-  console.log(data);
 
   return <div>DashboardPage</div>;
 }
