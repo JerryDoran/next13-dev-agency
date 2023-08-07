@@ -1,6 +1,7 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 
@@ -30,14 +31,28 @@ export default function DashboardPage() {
 
   const session = useSession();
 
-  function fetcher(...args) {
-    return fetch(...args).then((res) => res.json());
+  const router = useRouter();
+
+  // function fetcher(...args) {
+  //   return fetch(...args).then((res) => res.json());
+  // }
+
+  // const { data, error, isLoading } = useSWR(
+  //   'https://jsonplaceholder.typicode.com/posts',
+  //   fetcher
+  // );
+
+  if (session.status === 'loading') {
+    return <p>Loading...</p>;
   }
 
-  const { data, error, isLoading } = useSWR(
-    'https://jsonplaceholder.typicode.com/posts',
-    fetcher
-  );
+  if (session.status === 'unauthenticated') {
+    router?.push('/dashboard/login');
+  }
 
-  return <div>DashboardPage</div>;
+  if (session.status === 'authenticated') {
+    return <div>DashboardPage</div>;
+  }
+
+  console.log(session);
 }

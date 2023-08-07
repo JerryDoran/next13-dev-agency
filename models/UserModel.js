@@ -18,7 +18,7 @@ const userSchema = new Schema(
       type: String,
       required: [true, 'Please enter a password'],
       minLength: [6, 'Your password must be at least 6 characters'],
-      select: false, // this will make sure that when we get a user response back that the password will not be included
+      // select: false, // this will make sure that when we get a user response back that the password will not be included
     },
   },
   { timestamps: true }

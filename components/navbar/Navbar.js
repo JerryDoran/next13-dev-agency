@@ -3,8 +3,10 @@
 import Link from 'next/link';
 import { links } from './linksData';
 import DarkModeToggle from '../DarkModeToggle';
+import { signOut, useSession } from 'next-auth/react';
 
 export default function Navbar() {
+  const session = useSession();
   return (
     <div className='h-[100px] flex justify-between items-center'>
       <Link className='font-bold text-2xl' href='/'>
@@ -21,12 +23,14 @@ export default function Navbar() {
             {link.title}
           </Link>
         ))}
-        <button
-          className='py-1 px-3 border-none bg-[#54c38b] rounded-md cursor-pointer transition-colors duration-200 hover:bg-[#429b6e]'
-          onClick={() => alert('logged out')}
-        >
-          Logout
-        </button>
+        {session.status === 'authenticated' && (
+          <button
+            className='py-1 px-3 border-none bg-[#54c38b] rounded-md cursor-pointer transition-colors duration-200 hover:bg-[#429b6e]'
+            onClick={signOut}
+          >
+            Logout
+          </button>
+        )}
       </nav>
     </div>
   );
