@@ -13,3 +13,15 @@ export async function GET(request, { params }) {
     return new NextResponse('Database Error!', { status: 500 });
   }
 }
+
+export async function DELETE(request, { params }) {
+  const { id } = params;
+  try {
+    await dbConnect();
+    await Post.findByIdAndDelete(id);
+
+    return new NextResponse('Post has been deleted', { status: 200 });
+  } catch (error) {
+    return new NextResponse('Database Error!', { status: 500 });
+  }
+}
